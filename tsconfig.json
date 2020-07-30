@@ -8,5 +8,5 @@
     "outDir": "dist"
   },
   "lib": ["es2015"],
-  "exclude": ["./samples"]
+  "exclude": ["samples"]
 }

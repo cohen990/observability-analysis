@@ -1,34 +1,48 @@
-import { SyntaxKind, CallExpression, Declaration } from "typescript";
+import {
+  SyntaxKind,
+  CallExpression,
+  Declaration,
+  VariableDeclaration,
+} from "typescript";
 import { flatten } from "./syntaxTree";
+import { getObservables, Observable } from "./observables";
 
-export class Analyser {
-  analyseFile(target: string): number {
-    let declarations = 0;
-    let observations = 0;
-    const allNodes = flatten(target);
+interface ObservabilityOverview {
+  rating: number;
+  observables: Array<Observable>;
+}
 
-    allNodes.forEach((node) => {
-      if (this.isCallExpression(node)) {
-        if (this.isCalledWithAVariable(node as CallExpression)) {
-          observations += 1;
-        }
-      } else if (this.isVariableDeclaration(node)) {
-        declarations += 1;
+export function analyseFile(target: string): ObservabilityOverview {
+  let declarations: Array<VariableDeclaration> = [];
+  let observations: Array<CallExpression> = [];
+  const allNodes = flatten(target);
+
+  allNodes.forEach((node) => {
+    if (isCallExpression(node)) {
+      if (isCalledWithAVariable(node as CallExpression)) {
+        observations.push(node as CallExpression);
       }
-    });
+    } else if (isVariableDeclaration(node)) {
+      declarations.push(node as VariableDeclaration);
+    }
+  });
+  const observables = getObservables(declarations, observations);
 
-    return observations / declarations;
-  }
+  const observed = observables.filter((x) => x.observed).length;
+  return {
+    rating: observed / observables.length,
+    observables,
+  };
+}
 
-  private isCalledWithAVariable(node: CallExpression): boolean {
-    return node.arguments[0].kind === SyntaxKind.Identifier;
-  }
+function isCalledWithAVariable(node: CallExpression): boolean {
+  return node.arguments[0].kind === SyntaxKind.Identifier;
+}
 
-  private isCallExpression(node: Declaration): boolean {
-    return node.kind === SyntaxKind.CallExpression;
-  }
+function isCallExpression(node: Declaration): boolean {
+  return node.kind === SyntaxKind.CallExpression;
+}
 
-  private isVariableDeclaration(node: Declaration): boolean {
-    return node.kind === SyntaxKind.VariableDeclaration;
-  }
+function isVariableDeclaration(node: Declaration): boolean {
+  return node.kind === SyntaxKind.VariableDeclaration;
 }
