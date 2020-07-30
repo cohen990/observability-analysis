@@ -2,39 +2,55 @@ import {
   SyntaxKind,
   CallExpression,
   Declaration,
+  SourceFile,
   VariableDeclaration,
 } from "typescript";
 import { flatten } from "./syntaxTree";
 import { getObservables, Observable } from "./observables";
+import { compile } from "./compile";
+import { variableFrom } from "./variable";
+import { observationFrom } from "./observation";
 
-interface ObservabilityOverview {
+interface FileObservability {
+  file: string;
   rating: number;
   observables: Array<Observable>;
-  file: string;
 }
 
-export function analyseFile(target: string): ObservabilityOverview {
-  let declarations: Array<VariableDeclaration> = [];
-  let observations: Array<CallExpression> = [];
-  const allNodes = flatten(target);
+export function analyse(target: string): Array<FileObservability> {
+  const compiled = compile(target);
+  const libraryFiles = filterOutNodeModules(compiled);
 
-  allNodes.forEach((node) => {
-    if (isCallExpression(node)) {
-      if (isCalledWithAVariable(node as CallExpression)) {
-        observations.push(node as CallExpression);
-      }
-    } else if (isVariableDeclaration(node)) {
-      declarations.push(node as VariableDeclaration);
-    }
-  });
-  const observables = getObservables(declarations, observations);
+  return libraryFiles.map(analyseFile);
+}
+
+function analyseFile(file: SourceFile): FileObservability {
+  const allNodes = flatten(file);
+
+  const observations = allNodes
+    .filter(isCallExpression)
+    .filter(isCalledWithAVariable)
+    .map(observationFrom);
+
+  const variables = allNodes
+    .filter(isVariableDeclaration)
+    .map((x) => variableFrom(x as VariableDeclaration, file));
+
+  const observables = getObservables(variables, observations);
 
   const observed = observables.filter((x) => x.observed).length;
+
   return {
+    file: file.fileName,
     rating: observed / observables.length,
     observables,
-    file: target,
   };
+}
+
+export function filterOutNodeModules(
+  compiled: ReadonlyArray<SourceFile>
+): ReadonlyArray<SourceFile> {
+  return compiled.filter((f) => !/node_modules/.test(f.fileName));
 }
 
 function isCalledWithAVariable(node: CallExpression): boolean {

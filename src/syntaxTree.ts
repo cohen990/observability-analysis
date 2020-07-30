@@ -1,18 +1,8 @@
-import {
-  createProgram,
-  forEachChild,
-  Declaration,
-  SyntaxKind,
-} from "typescript";
+import { forEachChild, Declaration, SyntaxKind, SourceFile } from "typescript";
+import { compile } from "./compile";
 
-export function flatten(target: string): Array<Declaration> {
-  const program = createProgram([target], {});
-  const sourceFiles = program.getSourceFiles();
-
-  const targetFile = sourceFiles.filter(
-    (f) => !/node_modules/.test(f.fileName)
-  )[0];
-  return flattenAllNodes(targetFile);
+export function flatten(source: SourceFile): Array<Declaration> {
+  return flattenAllNodes(source);
 }
 
 function flattenAllNodes(sourceFile) {
