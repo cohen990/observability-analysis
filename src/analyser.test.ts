@@ -59,3 +59,5 @@ it("should calculate separate observabilities for each file", () => {
   });
   expect(observability[1].file).toBe(file);
 });
+
+it("should calculate observabilities for a whole project", () => {});

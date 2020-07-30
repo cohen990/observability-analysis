@@ -1,4 +1,3 @@
-import { VariableDeclaration, CallExpression } from "typescript";
 import { Variable } from "./variable";
 import { Observation } from "./observation";
 
