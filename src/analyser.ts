@@ -10,6 +10,7 @@ import { getObservables, Observable } from "./observables";
 interface ObservabilityOverview {
   rating: number;
   observables: Array<Observable>;
+  file: string;
 }
 
 export function analyseFile(target: string): ObservabilityOverview {
@@ -32,6 +33,7 @@ export function analyseFile(target: string): ObservabilityOverview {
   return {
     rating: observed / observables.length,
     observables,
+    file: target,
   };
 }
 

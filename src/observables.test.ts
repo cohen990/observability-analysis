@@ -38,9 +38,8 @@ it("should recognise observed", () => {
 });
 
 it("should recognise multiple observed", () => {
-  const flattened = flatten(
-    getSample("two-assignment-to-const-and-console-log-both")
-  );
+  const fileName = "two-assignment-to-const-and-console-log-both";
+  const flattened = flatten(getSample(fileName));
   const declarations = flattened
     .filter((x) => x.kind === SyntaxKind.VariableDeclaration)
     .map((x) => x as VariableDeclaration);
