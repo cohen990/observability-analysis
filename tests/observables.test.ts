@@ -1,12 +1,10 @@
 import { getObservables } from "../src/observables";
 import { flatten } from "../src/syntaxTree";
 import { getSample } from "./samples";
-import { SyntaxKind, VariableDeclaration, CallExpression } from "typescript";
 import { compile } from "../src/compile";
 import { filterOutNodeModules } from "../src/analyser";
 import { variableFrom } from "../src/base/variable";
 import { observationFrom } from "../src/base/observation";
-import { VariableNode, ObservationNode } from "../src/base/syntaxNode";
 import { buildScope } from "../src/base/scope";
 
 it("should list all unobserved", () => {
@@ -37,7 +35,7 @@ it("should recognise observed", () => {
     source
   );
   const observation = observationFrom(
-    flattened.filter((x) => x.isCallExpression())[0].toObservation()
+    flattened.filter((x) => x.isObservation())[0].toObservation()
   );
 
   const observables = getObservables(
@@ -64,7 +62,7 @@ it("should recognise multiple observed", () => {
     .filter((x) => x.isVariableDeclaration())
     .map((x) => variableFrom(x.toVariable(), source));
   const observations = flattened
-    .filter((x) => x.isCallExpression())
+    .filter((x) => x.isObservation())
     .map((x) => observationFrom(x.toObservation()));
 
   const observables = getObservables(

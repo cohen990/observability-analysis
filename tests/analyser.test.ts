@@ -117,3 +117,15 @@ it("should recognise an observation from a nested child scope", () => {
     observed: true,
   });
 });
+
+it("should ignore non-console-log function calls", () => {
+  const file = getSample("observations-with-random-function-calls");
+  const observability = analyse(file);
+
+  expect(observability).toHaveLength(1);
+  expect(observability[0].observables).toHaveLength(1);
+  expect(observability[0].observables[0]).toMatchObject({
+    variable: { name: "a", lineNumber: 1, character: 5, sourceFile: file },
+    observed: false,
+  });
+});

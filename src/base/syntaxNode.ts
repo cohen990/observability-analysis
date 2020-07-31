@@ -27,8 +27,33 @@ export class SyntaxNode implements Scoped {
     return this.base.kind === SyntaxKind.Block;
   };
 
-  isCallExpression: () => boolean = () => {
-    return this.base.kind === SyntaxKind.CallExpression;
+  private getExpressionText() {
+    try {
+      return (((this.base as CallExpression).expression as any)
+        .expression as any).text;
+    } catch {
+      return undefined;
+    }
+  }
+
+  private getExpressionName() {
+    try {
+      return (((this.base as CallExpression).expression as any).name as any)
+        .text;
+    } catch {
+      return undefined;
+    }
+  }
+
+  isObservation: () => boolean = () => {
+    const expressionText = this.getExpressionText();
+    const expressionName = this.getExpressionName();
+
+    return (
+      this.base.kind === SyntaxKind.CallExpression &&
+      expressionText === "console" &&
+      expressionName === "log"
+    );
   };
 
   toObservation: () => ObservationNode = () => {

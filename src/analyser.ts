@@ -10,7 +10,7 @@ import { getObservables, Observable } from "./observables";
 import { compile } from "./compile";
 import { variableFrom } from "./base/variable";
 import { observationFrom } from "./base/observation";
-import { SyntaxNode, ObservationNode, VariableNode } from "./base/syntaxNode";
+import { SyntaxNode, ObservationNode } from "./base/syntaxNode";
 import { buildScope } from "./base/scope";
 
 interface FileObservability {
@@ -30,7 +30,7 @@ function analyseFile(file: SourceFile): FileObservability {
   const allNodes = flatten(file);
 
   const observations = allNodes
-    .filter(isCallExpression)
+    .filter(isObservation)
     .map((x) => x.toObservation())
     .filter(isCalledWithAVariable)
     .map(observationFrom);
@@ -63,8 +63,8 @@ function isCalledWithAVariable(node: ObservationNode): boolean {
   return node.isCalledWithAVariable();
 }
 
-function isCallExpression(node: SyntaxNode): boolean {
-  return node.isCallExpression();
+function isObservation(node: SyntaxNode): boolean {
+  return node.isObservation();
 }
 
 function isVariableDeclaration(node: SyntaxNode): boolean {
