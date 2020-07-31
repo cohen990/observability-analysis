@@ -35,7 +35,7 @@ it("should recognise observed", () => {
     source
   );
   const observation = observationFrom(
-    flattened.filter((x) => x.isObservation())[0].toObservation()
+    flattened.filter((x) => x.isObservation(["console.log"]))[0].toObservation()
   );
 
   const observables = getObservables(
@@ -62,7 +62,7 @@ it("should recognise multiple observed", () => {
     .filter((x) => x.isVariableDeclaration())
     .map((x) => variableFrom(x.toVariable(), source));
   const observations = flattened
-    .filter((x) => x.isObservation())
+    .filter((x) => x.isObservation(["console.log"]))
     .map((x) => observationFrom(x.toObservation()));
 
   const observables = getObservables(

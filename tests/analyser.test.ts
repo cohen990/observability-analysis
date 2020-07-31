@@ -129,3 +129,30 @@ it("should ignore non-console-log function calls", () => {
     observed: false,
   });
 });
+
+it("should have 0 observability for an empty file", () => {
+  const file = getSample("empty-file");
+  const observability = analyse(file);
+
+  expect(observability).toHaveLength(1);
+  expect(observability[0].rating).toBe(0);
+  expect(observability[0].observables).toHaveLength(0);
+});
+
+it("should be configurable to accept aliases of console.log", () => {
+  const file = getSample("aliases-console-log");
+  const observability = analyse(file, { observers: ["alias"] });
+
+  expect(observability).toHaveLength(1);
+  expect(observability[0].rating).toBe(0.5);
+  expect(observability[0].observables).toHaveLength(2);
+});
+
+it("should recognise the observation if part of string interpolation", () => {
+  const file = getSample("string-interpolation");
+  const observability = analyse(file);
+
+  expect(observability).toHaveLength(1);
+  expect(observability[0].rating).toBe(1);
+  expect(observability[0].observables).toHaveLength(1);
+});

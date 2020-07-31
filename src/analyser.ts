@@ -19,18 +19,31 @@ interface FileObservability {
   observables: Array<Observable>;
 }
 
-export function analyse(target: string): Array<FileObservability> {
+interface AnalyserOptions {
+  observers?: Array<string>;
+}
+const defaultObserver = "console.log";
+
+export function analyse(
+  target: string,
+  options: AnalyserOptions = {}
+): Array<FileObservability> {
+  options.observers = options.observers || [];
+  const observers = [...options.observers, defaultObserver];
   const compiled = compile(target);
   const libraryFiles = filterOutNodeModules(compiled);
 
-  return libraryFiles.map(analyseFile);
+  return libraryFiles.map((x) => analyseFile(x, observers));
 }
 
-function analyseFile(file: SourceFile): FileObservability {
+function analyseFile(
+  file: SourceFile,
+  observers: Array<string>
+): FileObservability {
   const allNodes = flatten(file);
 
   const observations = allNodes
-    .filter(isObservation)
+    .filter((x) => x.isObservation(observers))
     .map((x) => x.toObservation())
     .filter(isCalledWithAVariable)
     .map(observationFrom);
@@ -43,12 +56,16 @@ function analyseFile(file: SourceFile): FileObservability {
   const scope = buildScope(allNodes);
 
   const observables = getObservables(variables, observations, scope);
-
   const observed = observables.filter((x) => x.observed).length;
+
+  const rating =
+    observables.length === 0
+      ? observables.length
+      : observed / observables.length;
 
   return {
     file: file.fileName,
-    rating: observed / observables.length,
+    rating,
     observables,
   };
 }
@@ -61,10 +78,6 @@ export function filterOutNodeModules(
 
 function isCalledWithAVariable(node: ObservationNode): boolean {
   return node.isCalledWithAVariable();
-}
-
-function isObservation(node: SyntaxNode): boolean {
-  return node.isObservation();
 }
 
 function isVariableDeclaration(node: SyntaxNode): boolean {

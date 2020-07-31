@@ -10,7 +10,7 @@ export interface Observable {
 export function getObservables(
   variables: Array<Variable>,
   calls: Array<Observation>,
-  scope
+  scope: Scope
 ): Array<Observable> {
   const observables: Array<Observable> = [];
   variables.forEach((x) => {
@@ -19,17 +19,21 @@ export function getObservables(
   calls.forEach((call) => {
     observables.filter(
       (observable) =>
-        observable.variable.name === call.name &&
-        isInScope(observable, call, scope)
+        isObserving(observable, call) &&
+        isInScope(observable.variable, call, scope)
     )[0].observed = true;
   });
   return observables;
 }
 
+function isObserving(observable: Observable, call: Observation) {
+  return observable.variable.name === call.observed;
+}
+
 function isInScope(
-  observable: Observable,
+  variable: Variable,
   call: Observation,
   scope: Scope
 ): boolean {
-  return scope.isInScope(call.scope, observable.variable.scope);
+  return scope.isInScope(call.scope, variable.scope);
 }

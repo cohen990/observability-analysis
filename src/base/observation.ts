@@ -1,13 +1,13 @@
 import { SyntaxNode, ObservationNode } from "./syntaxNode";
 
 export interface Observation {
-  name: string;
+  observed: string;
   scope: string;
   parentScope: string;
 }
 export function observationFrom(node: ObservationNode): Observation {
   return {
-    name: node.getName(),
+    observed: node.getObserved(),
     scope: node.scope,
     parentScope: node.parentScope,
   };

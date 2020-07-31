@@ -4,6 +4,8 @@ import {
   CallExpression,
   VariableDeclaration,
   SourceFile,
+  TemplateExpression,
+  Identifier,
 } from "typescript";
 import { v4 } from "uuid";
 import { Scoped } from "./scope";
@@ -45,15 +47,48 @@ export class SyntaxNode implements Scoped {
     }
   }
 
-  isObservation: () => boolean = () => {
-    const expressionText = this.getExpressionText();
-    const expressionName = this.getExpressionName();
+  private getSingleDottedExpression() {
+    return [this.getExpressionText(), this.getExpressionName()];
+  }
 
-    return (
-      this.base.kind === SyntaxKind.CallExpression &&
-      expressionText === "console" &&
-      expressionName === "log"
-    );
+  private getNoDottedExpression() {
+    try {
+      return ((this.base as CallExpression).expression as any).text;
+    } catch {
+      return undefined;
+    }
+  }
+
+  isObservation: (observers: Array<string>) => boolean = (
+    observers: Array<string>
+  ) => {
+    if (this.base.kind !== SyntaxKind.CallExpression) {
+      return false;
+    }
+
+    for (const observer of observers) {
+      const [expressionText, expressionName] = this.getSingleDottedExpression();
+
+      if (observer.indexOf(".") > 0) {
+        const [observerExpressionText, observerExpressionName] = observer.split(
+          "."
+        );
+
+        if (
+          expressionText === observerExpressionText &&
+          expressionName === observerExpressionName
+        ) {
+          return true;
+        }
+      } else {
+        const expressionText = this.getNoDottedExpression();
+        if (expressionText === observer) {
+          return true;
+        }
+      }
+    }
+
+    return false;
   };
 
   toObservation: () => ObservationNode = () => {
@@ -90,12 +125,25 @@ export class ObservationNode implements Scoped {
   };
 
   isCalledWithAVariable: () => boolean = () => {
-    return this.typed().arguments[0].kind === SyntaxKind.Identifier;
+    return this.argumentIsIdentifier() || this.argumentIsTemplate();
   };
 
-  getName: () => string = () => {
-    return (this.typed().arguments[0] as any).text;
+  getObserved: () => string = () => {
+    if (this.argumentIsIdentifier())
+      return (this.typed().arguments[0] as any).text;
+    else {
+      const thing = ((this.typed().arguments[0] as TemplateExpression)
+        .templateSpans[0].expression as Identifier).text;
+      return thing;
+    }
   };
+
+  private argumentIsIdentifier() {
+    return this.typed().arguments[0].kind === SyntaxKind.Identifier;
+  }
+  private argumentIsTemplate() {
+    return this.typed().arguments[0].kind === SyntaxKind.TemplateExpression;
+  }
 }
 
 export class VariableNode implements Scoped {
