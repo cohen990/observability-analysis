@@ -15,5 +15,8 @@
     "ts-jest": "^26.1.4",
     "tslint": "^6.1.2",
     "typescript": "^3.9.7"
+  },
+  "dependencies": {
+    "uuid": "^8.3.0"
   }
 }
