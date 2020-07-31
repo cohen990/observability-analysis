@@ -1,10 +1,4 @@
-import {
-  SyntaxKind,
-  CallExpression,
-  Declaration,
-  SourceFile,
-  VariableDeclaration,
-} from "typescript";
+import { SourceFile } from "typescript";
 import { flatten } from "./syntaxTree";
 import { getObservables, Observable } from "./observables";
 import { compile } from "./compile";
@@ -12,6 +6,12 @@ import { variableFrom } from "./base/variable";
 import { observationFrom } from "./base/observation";
 import { SyntaxNode, ObservationNode } from "./base/syntaxNode";
 import { buildScope } from "./base/scope";
+
+interface ObservabilityAnalysis {
+  files: Array<FileObservability>;
+  filesInspected: number;
+  rating: number;
+}
 
 interface FileObservability {
   file: string;
@@ -27,13 +27,19 @@ const defaultObserver = "console.log";
 export function analyse(
   target: string,
   options: AnalyserOptions = {}
-): Array<FileObservability> {
+): ObservabilityAnalysis {
   options.observers = options.observers || [];
   const observers = [...options.observers, defaultObserver];
   const compiled = compile(target);
   const libraryFiles = filterOutNodeModules(compiled);
 
-  return libraryFiles.map((x) => analyseFile(x, observers));
+  const analysed = libraryFiles.map((x) => analyseFile(x, observers));
+
+  return {
+    files: analysed,
+    filesInspected: analysed.length,
+    rating: averageRating(analysed),
+  };
 }
 
 function analyseFile(
@@ -82,4 +88,13 @@ function isCalledWithAVariable(node: ObservationNode): boolean {
 
 function isVariableDeclaration(node: SyntaxNode): boolean {
   return node.isVariableDeclaration();
+}
+
+function averageRating(analysedFiles: Array<FileObservability>) {
+  let runningTotal = 0;
+  for (const file of analysedFiles) {
+    runningTotal += file.rating;
+  }
+
+  return runningTotal / analysedFiles.length;
 }
