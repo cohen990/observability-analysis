@@ -156,3 +156,21 @@ it("should recognise the observation if part of string interpolation", () => {
   expect(observability[0].rating).toBe(1);
   expect(observability[0].observables).toHaveLength(1);
 });
+
+it("should recognise the observation if not the first part of string interpolation", () => {
+  const file = getSample("not-first-part-of-string-interpolation");
+  const observability = analyse(file);
+
+  expect(observability).toHaveLength(1);
+  expect(observability[0].rating).toBe(1);
+  expect(observability[0].observables).toHaveLength(1);
+});
+
+it("should not blow up if console logging some static info", () => {
+  const file = getSample("console-log-static-info");
+  const observability = analyse(file);
+
+  expect(observability).toHaveLength(1);
+  expect(observability[0].rating).toBe(0);
+  expect(observability[0].observables).toHaveLength(1);
+});

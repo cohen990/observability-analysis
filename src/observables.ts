@@ -17,11 +17,15 @@ export function getObservables(
     observables.push({ variable: x, observed: false });
   });
   calls.forEach((call) => {
-    observables.filter(
+    const match = observables.filter(
       (observable) =>
         isObserving(observable, call) &&
         isInScope(observable.variable, call, scope)
-    )[0].observed = true;
+    )[0];
+    if (!match) {
+      return;
+    }
+    match.observed = true;
   });
   return observables;
 }
