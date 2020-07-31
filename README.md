@@ -9,3 +9,8 @@ Eventually, this should result in some kind of observability metric for the code
 next steps
 ensure it is able to tell the difference between a console.log and any other function call
 ensure it is able to not die when a console log is done of a variable imported from another module
+
+####
+
+next steps
+ensure it is able to recognise parameters passed into functions and can match them to observations
