@@ -31,7 +31,7 @@ describe("files", () => {
   });
 
   it("should recognise an observation of a variable from a different file", () => {
-    const file = getSample("observed-in-a-different-file");
+    const file = sample("observed-in-a-different-file");
     const analysis = analyse(file);
     const files = analysis.files;
 
