@@ -7,15 +7,17 @@ import { observationFrom } from "./base/observation";
 import { SyntaxNode, ObservationNode } from "./base/syntaxNode";
 import { buildScope } from "./base/scope";
 
+type Rating = number | "NoRating";
+
 interface ObservabilityAnalysis {
   files: Array<FileObservability>;
   filesInspected: number;
-  rating: number;
+  rating: Rating;
 }
 
 interface FileObservability {
   file: string;
-  rating: number;
+  rating: Rating;
   observables: Array<Observable>;
 }
 
@@ -31,7 +33,7 @@ export function analyse(
   options.observers = options.observers || [];
   const observers = [...options.observers, defaultObserver];
   const compiled = compile(target);
-  const libraryFiles = filterOutNodeModules(compiled);
+  const libraryFiles = compiled.filter(isNotNodeModule);
 
   const analysed = libraryFiles.map((x) => analyseFile(x, observers));
 
@@ -65,9 +67,7 @@ function analyseFile(
   const observed = observables.filter((x) => x.observed).length;
 
   const rating =
-    observables.length === 0
-      ? observables.length
-      : observed / observables.length;
+    observables.length === 0 ? "NoRating" : observed / observables.length;
 
   return {
     file: file.fileName,
@@ -76,10 +76,8 @@ function analyseFile(
   };
 }
 
-export function filterOutNodeModules(
-  compiled: ReadonlyArray<SourceFile>
-): ReadonlyArray<SourceFile> {
-  return compiled.filter((f) => !/node_modules/.test(f.fileName));
+export function isNotNodeModule(file: SourceFile): boolean {
+  return !/node_modules/.test(file.fileName);
 }
 
 function isCalledWithAVariable(node: ObservationNode): boolean {
@@ -90,11 +88,25 @@ function isVariableDeclaration(node: SyntaxNode): boolean {
   return node.isVariableDeclaration();
 }
 
-function averageRating(analysedFiles: Array<FileObservability>) {
-  let runningTotal = 0;
-  for (const file of analysedFiles) {
-    runningTotal += file.rating;
+function averageRating(analysedFiles: Array<FileObservability>): Rating {
+  const ratedFiles = analysedFiles.filter(isRated);
+  if (ratedFiles.length === 0) {
+    return "NoRating";
   }
 
-  return runningTotal / analysedFiles.length;
+  const totalRating = ratedFiles.map(getRating).reduce(addTogether, 0);
+
+  return totalRating / ratedFiles.length;
+}
+
+function isRated(observability: FileObservability): boolean {
+  return observability.rating !== "NoRating";
+}
+
+function getRating(observability: FileObservability): number {
+  return observability.rating as number;
+}
+
+function addTogether(first: number, second: number): number {
+  return first + second;
 }

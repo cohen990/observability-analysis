@@ -12,26 +12,39 @@ export function getObservables(
   calls: Array<Observation>,
   scope: Scope
 ): Array<Observable> {
-  const observables: Array<Observable> = [];
-  variables.forEach((x) => {
-    observables.push({ variable: x, observed: false });
-  });
-  calls.forEach((call) => {
-    const match = observables.filter(
-      (observable) =>
-        isObserving(observable, call) &&
-        isInScope(observable.variable, call, scope)
-    )[0];
-    if (!match) {
-      return;
-    }
-    match.observed = true;
-  });
+  const observables = variables.map(toObservable);
+  calls.forEach((call) => matchObservations(call, observables, scope));
+
   return observables;
 }
 
-function isObserving(observable: Observable, call: Observation) {
-  return observable.variable.name === call.observed;
+function toObservable(variable: Variable) {
+  return { variable, observed: false };
+}
+
+function matchObservations(
+  call: Observation,
+  observables: Array<Observable>,
+  scope: Scope
+): void {
+  observables
+    .filter((observable) => isObserving(observable, call, scope))
+    .forEach(markObserved);
+}
+
+function isObserving(
+  observable: Observable,
+  call: Observation,
+  scope: Scope
+): boolean {
+  return (
+    variableMatches(observable, call) &&
+    isInScope(observable.variable, call, scope)
+  );
+}
+
+function variableMatches(observable: Observable, call: Observation): boolean {
+  return call.observed.indexOf(observable.variable.name) >= 0;
 }
 
 function isInScope(
@@ -40,4 +53,8 @@ function isInScope(
   scope: Scope
 ): boolean {
   return scope.isInScope(call.scope, variable.scope);
+}
+
+function markObserved(observable: Observable): void {
+  observable.observed = true;
 }

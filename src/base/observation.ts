@@ -1,7 +1,7 @@
 import { SyntaxNode, ObservationNode } from "./syntaxNode";
 
 export interface Observation {
-  observed: string;
+  observed: Array<string>;
   scope: string;
   parentScope: string;
 }

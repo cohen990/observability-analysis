@@ -128,19 +128,21 @@ export class ObservationNode implements Scoped {
     return this.argumentIsIdentifier() || this.argumentIsTemplate();
   };
 
-  getObserved: () => string = () => {
+  getObserved: () => Array<string> = () => {
     if (this.argumentIsIdentifier())
       return (this.typed().arguments[0] as any).text;
     else {
-      const thing = ((this.typed().arguments[0] as TemplateExpression)
-        .templateSpans[0].expression as Identifier).text;
-      return thing;
+      return (this.typed()
+        .arguments[0] as TemplateExpression).templateSpans.map(
+        (x) => (x.expression as Identifier).text
+      );
     }
   };
 
   private argumentIsIdentifier() {
     return this.typed().arguments[0].kind === SyntaxKind.Identifier;
   }
+
   private argumentIsTemplate() {
     return this.typed().arguments[0].kind === SyntaxKind.TemplateExpression;
   }
