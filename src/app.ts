@@ -1,7 +1,7 @@
 import * as fs from "fs";
 import { analyse } from "./analyser";
 import { inspect } from "util";
-import { getMain } from "./projects";
+import { getMain } from "./files";
 const args = process.argv.slice(2);
 const input = args[0];
 

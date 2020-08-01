@@ -1,11 +1,10 @@
 import { getObservables } from "../../src/observables";
 import { flatten } from "../../src/syntaxTree";
 import { getSample } from "../samples";
-import { compile } from "../../src/compile";
-import { isNotNodeModule } from "../../src/analyser";
-import { variableFrom } from "../../src/base/variable";
-import { observationFrom } from "../../src/base/observation";
-import { buildScope } from "../../src/base/scope";
+import { compile, isNotNodeModule } from "../../src/files/";
+import { variableFrom } from "../../src/syntax/variable";
+import { observationFrom } from "../../src/syntax/observation";
+import { buildScope } from "../../src/scope";
 
 describe("observables", () => {
   const sample = (file) => getSample(file, "observables/");

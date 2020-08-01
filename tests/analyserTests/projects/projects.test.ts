@@ -1,7 +1,7 @@
 import { analyse } from "../../../src/analyser";
 import { getSample } from "../../samples";
-import { getMain } from "../../../src/projects";
 import { path } from "../directory";
+import { getMain } from "../../../src/files";
 
 describe("projects", () => {
   const sample = (file) => getSample(file, `${path}/projects/`);

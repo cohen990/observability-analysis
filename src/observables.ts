@@ -1,6 +1,6 @@
-import { Variable } from "./base/variable";
-import { Observation } from "./base/observation";
-import { Scope } from "./base/scope";
+import { Variable } from "./syntax/variable";
+import { Observation } from "./syntax/observation";
+import { Scope } from "./scope";
 
 export interface Observable {
   variable: Variable;

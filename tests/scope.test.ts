@@ -1,5 +1,5 @@
 import { v4 } from "uuid";
-import { buildScope } from "../../src/base/scope";
+import { buildScope } from "../src/scope";
 
 it("should build a single node scope", () => {
   const scope = buildScope([{ scope: v4() }]);

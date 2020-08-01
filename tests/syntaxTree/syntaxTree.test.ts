@@ -1,7 +1,6 @@
 import { flatten } from "../../src/syntaxTree";
 import { getSample } from "../samples";
-import { compile } from "../../src/compile";
-import { isNotNodeModule } from "../../src/analyser";
+import { compile, isNotNodeModule } from "../../src/files/";
 
 describe("sytax tree", () => {
   const sample = (file) => getSample(file, "syntaxTree/");

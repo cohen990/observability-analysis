@@ -8,7 +8,7 @@ import {
   Identifier,
 } from "typescript";
 import { v4 } from "uuid";
-import { Scoped } from "./scope";
+import { Scoped } from "../scope";
 
 export class SyntaxNode implements Scoped {
   base: Declaration;
