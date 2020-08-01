@@ -2,13 +2,13 @@ import {
   Declaration,
   SyntaxKind,
   CallExpression,
-  VariableDeclaration,
-  SourceFile,
-  TemplateExpression,
-  Identifier,
+  FunctionDeclaration,
 } from "typescript";
 import { v4 } from "uuid";
-import { Scoped } from "../scope";
+import { Scoped } from "../../scope";
+import { ObservationNode } from "../nodes/observationNode";
+import { VariableNode } from "../nodes/variableNode";
+import { FunctionNode } from "../nodes/functionNode";
 
 export class SyntaxNode implements Scoped {
   base: Declaration;
@@ -95,7 +95,7 @@ export class SyntaxNode implements Scoped {
     return new ObservationNode(this);
   };
 
-  isVariableDeclaration: () => boolean = () => {
+  isVariable: () => boolean = () => {
     return this.base.kind === SyntaxKind.VariableDeclaration;
   };
 
@@ -103,77 +103,24 @@ export class SyntaxNode implements Scoped {
     return new VariableNode(this);
   };
 
+  isFunctionWithParameters: () => boolean = () => {
+    return this.isFunction() && this.hasParameters();
+  };
+
+  toFunction: () => FunctionNode = () => {
+    return new FunctionNode(this);
+  };
+
   nest: () => void = () => {
     this.parentScope = this.scope;
     this.scope = v4();
   };
-}
 
-export class ObservationNode implements Scoped {
-  private node: SyntaxNode;
-  scope: string;
-  parentScope?: string;
-
-  constructor(node: SyntaxNode) {
-    this.node = node;
-    this.scope = node.scope;
-    this.parentScope = node.parentScope;
+  private isFunction(): boolean {
+    return this.base.kind === SyntaxKind.FunctionDeclaration;
   }
 
-  private typed: () => CallExpression = () => {
-    return this.node.base as CallExpression;
-  };
-
-  isCalledWithAVariable: () => boolean = () => {
-    return this.argumentIsIdentifier() || this.argumentIsTemplate();
-  };
-
-  getObserved: () => Array<string> = () => {
-    if (this.argumentIsIdentifier())
-      return (this.typed().arguments[0] as any).text;
-    else {
-      return (this.typed()
-        .arguments[0] as TemplateExpression).templateSpans.map(
-        (x) => (x.expression as Identifier).text
-      );
-    }
-  };
-
-  private argumentIsIdentifier() {
-    return this.typed().arguments[0].kind === SyntaxKind.Identifier;
+  private hasParameters(): boolean {
+    return (this.base as FunctionDeclaration).parameters.length > 0;
   }
-
-  private argumentIsTemplate() {
-    return this.typed().arguments[0].kind === SyntaxKind.TemplateExpression;
-  }
-}
-
-export class VariableNode implements Scoped {
-  private node: SyntaxNode;
-  scope: string;
-  parentScope?: string;
-
-  constructor(node: SyntaxNode) {
-    this.node = node;
-    this.scope = node.scope;
-    this.parentScope = node.parentScope;
-  }
-
-  private typed: () => VariableDeclaration = () => {
-    return this.node.base as VariableDeclaration;
-  };
-
-  getName: () => string = () => {
-    return (this.typed().name as any).text;
-  };
-
-  getLine: (sourceFile: SourceFile) => number = (sourceFile: SourceFile) => {
-    return sourceFile.getLineAndCharacterOfPosition(this.typed().pos).line + 1;
-  };
-
-  getCharacter: (sourceFile: SourceFile) => number = (
-    sourceFile: SourceFile
-  ) => {
-    return sourceFile.getLineAndCharacterOfPosition(this.typed().pos).character;
-  };
 }

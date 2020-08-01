@@ -1,5 +1,6 @@
 import { SourceFile } from "typescript";
-import { VariableNode } from "./syntaxNode";
+import { VariableNode } from "./nodes/variableNode";
+import { FunctionNode } from "./nodes/functionNode";
 
 export interface Variable {
   name: string;
@@ -19,4 +20,21 @@ export function variableFrom(node: VariableNode, source: SourceFile): Variable {
     scope: node.scope,
     parentScope: node.parentScope,
   };
+}
+
+export function variablesFromFunction(
+  node: FunctionNode,
+  source: SourceFile
+): Array<Variable> {
+  const parameter = node.getParameter();
+  return [
+    {
+      name: parameter.getName(),
+      lineNumber: parameter.getLine(source),
+      character: parameter.getCharacter(source),
+      sourceFile: source.fileName,
+      scope: node.scope,
+      parentScope: node.parentScope,
+    },
+  ];
 }

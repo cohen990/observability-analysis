@@ -14,7 +14,7 @@ describe("observables", () => {
     const source = compiled.filter(isNotNodeModule)[0];
     const flattened = flatten(source);
     const declaration = variableFrom(
-      flattened.filter((x) => x.isVariableDeclaration())[0].toVariable(),
+      flattened.filter((x) => x.isVariable())[0].toVariable(),
       source
     );
 
@@ -36,7 +36,7 @@ describe("observables", () => {
     const source = compiled.filter(isNotNodeModule)[0];
     const flattened = flatten(source);
     const declaration = variableFrom(
-      flattened.filter((x) => x.isVariableDeclaration())[0].toVariable(),
+      flattened.filter((x) => x.isVariable())[0].toVariable(),
       source
     );
     const observation = observationFrom(
@@ -66,7 +66,7 @@ describe("observables", () => {
     const flattened = flatten(source);
 
     const declarations = flattened
-      .filter((x) => x.isVariableDeclaration())
+      .filter((x) => x.isVariable())
       .map((x) => variableFrom(x.toVariable(), source));
     const observations = flattened
       .filter((x) => x.isObservation(["console.log"]))

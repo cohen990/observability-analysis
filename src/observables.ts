@@ -18,7 +18,7 @@ export function getObservables(
   return observables;
 }
 
-function toObservable(variable: Variable) {
+function toObservable(variable: Variable): Observable {
   return { variable, observed: false };
 }
 

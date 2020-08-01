@@ -1,4 +1,4 @@
-import { ObservationNode } from "./syntaxNode";
+import { ObservationNode } from "./nodes/observationNode";
 
 export interface Observation {
   observed: Array<string>;

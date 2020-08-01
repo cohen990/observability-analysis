@@ -1,4 +1,3 @@
-import { SourceFile } from "typescript";
 import { ObservabilityAnalysis, averageRating } from "./analysis/analysis";
 import { analyseFile } from "./analysis/fileAnalyser";
 import { compile, isNotNodeModule } from "./files";

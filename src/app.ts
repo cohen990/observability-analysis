@@ -7,7 +7,7 @@ const input = args[0];
 
 fs.statSync(input);
 
-const observers = ["debugLog"];
+const observers = ["debugLog", "this.out.write"];
 const options = { observers };
 if (input.endsWith("/")) {
   const main = getMain(input);

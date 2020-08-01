@@ -1,5 +1,5 @@
 import { forEachChild, Declaration, SourceFile } from "typescript";
-import { SyntaxNode } from "./syntax/syntaxNode";
+import { SyntaxNode } from "./syntax/nodes/syntaxNode";
 
 export function flatten(source: SourceFile): Array<SyntaxNode> {
   return flattenAllNodes(source as Declaration);
