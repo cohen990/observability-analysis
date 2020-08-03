@@ -1,5 +1,5 @@
-const a = 100;
+const noopB = 100;
 
-function thing() {}
+function noopFunctionA() {}
 
-thing();
+noopFunctionA();

@@ -1,1 +1,1 @@
-function thing(a) {}
+function functionA(a) {}

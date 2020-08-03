@@ -1,2 +1,2 @@
-const a = 1;
+const noopA = 1;
 console.log("some static info");

@@ -1,2 +1,2 @@
-const a = 5;
-console.log(`${a}`);
+const interpolationD = 5;
+console.log(`${interpolationD}`);

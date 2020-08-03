@@ -1,5 +1,5 @@
-const a = 100;
+const scopeB = 100;
 
-function thing() {
-  console.log(a);
+function scopeFunctionB() {
+  console.log(scopeB);
 }

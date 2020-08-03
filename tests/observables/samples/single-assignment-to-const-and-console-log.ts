@@ -1,2 +1,2 @@
-const a = 100;
-console.log(a);
+const observableA = 100;
+console.log(observableA);

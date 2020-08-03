@@ -1,3 +1,3 @@
-const a = 100;
-const b = 200;
-console.log(a);
+const first = 100;
+const second = 200;
+console.log(first);

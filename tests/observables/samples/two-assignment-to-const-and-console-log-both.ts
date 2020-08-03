@@ -1,4 +1,4 @@
-const a = 100;
-const b = 200;
-console.log(a);
-console.log(b);
+const observableB = 100;
+const observableC = 200;
+console.log(observableB);
+console.log(observableC);

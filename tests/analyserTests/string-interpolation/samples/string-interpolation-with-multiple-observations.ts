@@ -1,3 +1,3 @@
-const a = 5;
-const b = 10;
-console.log(`${a}${b}`);
+const interpolationB = 5;
+const interpolationC = 10;
+console.log(`${interpolationB}${interpolationC}`);

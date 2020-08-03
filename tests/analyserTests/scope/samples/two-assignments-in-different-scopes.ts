@@ -1,7 +1,7 @@
-const a = 100;
+const scopeC = 100;
 
-function thing() {
-  const a = 5;
+function scopeFunctionC() {
+  const scopeC = 5;
 }
 
-console.log(a);
+console.log(scopeC);

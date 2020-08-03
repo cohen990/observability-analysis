@@ -1,1 +1,1 @@
-const a = 100;
+const syntaxTreeA = 100;

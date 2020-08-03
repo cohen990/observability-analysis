@@ -12,11 +12,21 @@ describe("scope", () => {
     expect(files).toHaveLength(1);
     expect(files[0].observables).toHaveLength(2);
     expect(files[0].observables[0]).toMatchObject({
-      variable: { name: "a", lineNumber: 4, character: 7, sourceFile: file },
+      variable: {
+        name: "scopeC",
+        lineNumber: 4,
+        character: 7,
+        sourceFile: file,
+      },
       observed: false,
     });
     expect(files[0].observables[1]).toMatchObject({
-      variable: { name: "a", lineNumber: 1, character: 5, sourceFile: file },
+      variable: {
+        name: "scopeC",
+        lineNumber: 1,
+        character: 5,
+        sourceFile: file,
+      },
       observed: true,
     });
   });
@@ -28,7 +38,12 @@ describe("scope", () => {
     expect(files).toHaveLength(1);
     expect(files[0].observables).toHaveLength(1);
     expect(files[0].observables[0]).toMatchObject({
-      variable: { name: "a", lineNumber: 1, character: 5, sourceFile: file },
+      variable: {
+        name: "scopeB",
+        lineNumber: 1,
+        character: 5,
+        sourceFile: file,
+      },
       observed: true,
     });
   });
@@ -40,7 +55,12 @@ describe("scope", () => {
     expect(files).toHaveLength(1);
     expect(files[0].observables).toHaveLength(1);
     expect(files[0].observables[0]).toMatchObject({
-      variable: { name: "a", lineNumber: 1, character: 5, sourceFile: file },
+      variable: {
+        name: "scopeA",
+        lineNumber: 1,
+        character: 5,
+        sourceFile: file,
+      },
       observed: true,
     });
   });

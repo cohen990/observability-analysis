@@ -10,7 +10,7 @@ describe("observers", () => {
     const files = analyse(file, { observers: ["observer"] }).files;
 
     expect(files).toHaveLength(1);
-    expect(files[0].rating).toBe(0.5);
+    expect(files[0].rating).toBe(1);
     expect(files[0].observables).toHaveLength(2);
   });
 });

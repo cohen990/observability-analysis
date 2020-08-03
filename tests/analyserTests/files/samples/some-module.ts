@@ -1,3 +1,3 @@
-export const a = 5;
+export const filesA = 5;
 
-console.log(a);
+console.log(filesA);

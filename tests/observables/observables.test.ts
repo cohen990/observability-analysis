@@ -25,7 +25,7 @@ describe("observables", () => {
     );
     expect(declarations).toHaveLength(1);
     expect(declarations[0]).toMatchObject({
-      variable: { name: "a" },
+      variable: { name: "observableA" },
       observed: false,
     });
   });
@@ -53,7 +53,7 @@ describe("observables", () => {
 
     expect(observables).toHaveLength(1);
     expect(observables[0]).toMatchObject({
-      variable: { name: "a" },
+      variable: { name: "observableA" },
       observed: true,
     });
   });
@@ -80,11 +80,11 @@ describe("observables", () => {
 
     expect(observables).toHaveLength(2);
     expect(observables[1]).toMatchObject({
-      variable: { name: "a" },
+      variable: { name: "observableB" },
       observed: true,
     });
     expect(observables[0]).toMatchObject({
-      variable: { name: "b" },
+      variable: { name: "observableC" },
       observed: true,
     });
   });

@@ -1,5 +1,5 @@
 const observer = (thing) => {};
 
-const a = 100;
+const observersA = 100;
 
-observer(a);
+observer(observersA);

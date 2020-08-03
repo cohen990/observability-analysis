@@ -1,3 +1,3 @@
-import { a } from "./some-module";
+import { filesA } from "./some-module";
 
-console.log(a);
+console.log(filesA);

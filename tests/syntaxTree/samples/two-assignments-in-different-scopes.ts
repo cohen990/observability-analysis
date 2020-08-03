@@ -1,7 +1,7 @@
-const a = 100;
+const syntaxTreeB = 100;
 
-function thing() {
+function myFunction() {
   const a = 5;
 }
 
-console.log(a);
+console.log(syntaxTreeB);

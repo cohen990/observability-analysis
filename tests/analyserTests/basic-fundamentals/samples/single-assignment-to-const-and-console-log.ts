@@ -1,2 +1,2 @@
-const a = 100;
-console.log(a);
+const singleAssignment = 100;
+console.log(singleAssignment);

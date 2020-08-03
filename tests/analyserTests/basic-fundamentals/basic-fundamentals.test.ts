@@ -15,7 +15,7 @@ describe("basic fundamentals", () => {
     expect(files[0].observables).toHaveLength(1);
     expect(files[0].observables[0]).toMatchObject({
       variable: {
-        name: "a",
+        name: "singleAssignment",
         lineNumber: 1,
         character: 5,
         sourceFile: file,

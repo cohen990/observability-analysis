@@ -1,2 +1,2 @@
-const a = 100;
+const noopC = 100;
 console.log("some other stuff");

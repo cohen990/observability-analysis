@@ -13,18 +13,18 @@ describe("files", () => {
     expect(files[0].rating).toBe(1);
     expect(files[0].observables).toHaveLength(1);
     expect(files[0].observables[0]).toMatchObject({
-      variable: { name: "a", lineNumber: 1, sourceFile: expectedModule },
+      variable: { name: "filesA", lineNumber: 1, sourceFile: expectedModule },
       observed: true,
     });
     expect(files[0].file).toBe(expectedModule);
     expect(files[1].rating).toBe(0.5);
     expect(files[1].observables).toHaveLength(2);
     expect(files[1].observables[0]).toMatchObject({
-      variable: { name: "d", lineNumber: 4, sourceFile: file },
+      variable: { name: "filesD", lineNumber: 4, sourceFile: file },
       observed: false,
     });
     expect(files[1].observables[1]).toMatchObject({
-      variable: { name: "c", lineNumber: 3, sourceFile: file },
+      variable: { name: "filesC", lineNumber: 3, sourceFile: file },
       observed: true,
     });
     expect(files[1].file).toBe(file);
@@ -42,7 +42,7 @@ describe("files", () => {
     expect(files[0].observables[0]).toMatchObject({
       observed: true,
       variable: {
-        name: "a",
+        name: "filesA",
       },
     });
     expect(files[0].observables[0].variable.sourceFile).toContain(

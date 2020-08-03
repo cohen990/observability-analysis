@@ -20,7 +20,12 @@ describe("no operation", () => {
     expect(files).toHaveLength(1);
     expect(files[0].observables).toHaveLength(1);
     expect(files[0].observables[0]).toMatchObject({
-      variable: { name: "a", lineNumber: 1, character: 5, sourceFile: file },
+      variable: {
+        name: "noopB",
+        lineNumber: 1,
+        character: 5,
+        sourceFile: file,
+      },
       observed: false,
     });
   });

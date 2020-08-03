@@ -1,7 +1,7 @@
-const a = 100;
+const scopeA = 100;
 
-function child() {
+function scopeFunctionA() {
   function childOfChild() {
-    console.log(a);
+    console.log(scopeA);
   }
 }
