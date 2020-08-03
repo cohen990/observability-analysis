@@ -49,4 +49,24 @@ describe("files", () => {
       "some-module"
     );
   });
+
+  it("should recognise that an imported function is observing a variable", () => {
+    const file = sample("observation-happening-in-imported-function");
+    const analysis = analyse(file);
+    const files = analysis.files;
+
+    expect(analysis.rating).toBe(1);
+    expect(files).toHaveLength(2);
+    expect(files[0].rating).toBe(1);
+    expect(files[0].observables).toHaveLength(1);
+    expect(files[0].observables[0]).toMatchObject({
+      observed: true,
+      variable: {
+        name: "filesB",
+      },
+    });
+    expect(files[0].observables[0].variable.sourceFile).toContain(
+      "observer-module"
+    );
+  });
 });

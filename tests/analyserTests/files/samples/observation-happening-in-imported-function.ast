@@ -1,0 +1,727 @@
+><><><><></home/dan/git/observability-analysis/tests/analyserTests/files/samples/observer-module.ts><><><><><><
+SourceFileObject {
+  pos: 0,
+  end: 58,
+  flags: 0,
+  modifierFlagsCache: 0,
+  transformFlags: 0,
+  parent: undefined,
+  kind: 290,
+  text: 'export const someFunction = (a) => {\n  console.log(a);\n};\n',
+  bindDiagnostics: [],
+  bindSuggestionDiagnostics: undefined,
+  languageVersion: undefined,
+  fileName: '/home/dan/git/observability-analysis/tests/analyserTests/files/samples/observer-module.ts',
+  languageVariant: 0,
+  isDeclarationFile: false,
+  scriptKind: 3,
+  pragmas: Map(0) {},
+  checkJsDirective: undefined,
+  referencedFiles: [],
+  typeReferenceDirectives: [],
+  libReferenceDirectives: [],
+  amdDependencies: [],
+  hasNoDefaultLib: false,
+  statements: [
+    NodeObject {
+      pos: 0,
+      end: 57,
+      flags: 0,
+      modifierFlagsCache: 0,
+      transformFlags: 0,
+      parent: undefined,
+      kind: 225,
+      decorators: undefined,
+      modifiers: [
+        TokenObject {
+          pos: 0,
+          end: 6,
+          flags: 0,
+          modifierFlagsCache: 0,
+          transformFlags: 0,
+          parent: undefined,
+          kind: 89
+        },
+        pos: 0,
+        end: 6
+      ],
+      declarationList: NodeObject {
+        pos: 6,
+        end: 56,
+        flags: 2,
+        modifierFlagsCache: 0,
+        transformFlags: 0,
+        parent: undefined,
+        kind: 243,
+        declarations: [
+          NodeObject {
+            pos: 12,
+            end: 56,
+            flags: 0,
+            modifierFlagsCache: 0,
+            transformFlags: 0,
+            parent: undefined,
+            kind: 242,
+            name: IdentifierObject {
+              pos: 12,
+              end: 25,
+              flags: 0,
+              modifierFlagsCache: 0,
+              transformFlags: 0,
+              parent: undefined,
+              kind: 75,
+              escapedText: 'someFunction'
+            },
+            type: undefined,
+            initializer: NodeObject {
+              pos: 27,
+              end: 56,
+              flags: 0,
+              modifierFlagsCache: 0,
+              transformFlags: 0,
+              parent: undefined,
+              kind: 202,
+              modifiers: undefined,
+              typeParameters: undefined,
+              parameters: [
+                NodeObject {
+                  pos: 29,
+                  end: 30,
+                  flags: 0,
+                  modifierFlagsCache: 0,
+                  transformFlags: 0,
+                  parent: undefined,
+                  kind: 156,
+                  decorators: undefined,
+                  modifiers: undefined,
+                  dotDotDotToken: undefined,
+                  name: IdentifierObject {
+                    pos: 29,
+                    end: 30,
+                    flags: 0,
+                    modifierFlagsCache: 0,
+                    transformFlags: 0,
+                    parent: undefined,
+                    kind: 75,
+                    escapedText: 'a'
+                  },
+                  questionToken: undefined,
+                  type: undefined,
+                  initializer: undefined
+                },
+                pos: 29,
+                end: 30
+              ],
+              equalsGreaterThanToken: TokenObject {
+                pos: 31,
+                end: 34,
+                flags: 0,
+                modifierFlagsCache: 0,
+                transformFlags: 0,
+                parent: undefined,
+                kind: 38
+              },
+              body: NodeObject {
+                pos: 34,
+                end: 56,
+                flags: 0,
+                modifierFlagsCache: 0,
+                transformFlags: 0,
+                parent: undefined,
+                kind: 223,
+                multiLine: true,
+                statements: [
+                  NodeObject {
+                    pos: 36,
+                    end: 54,
+                    flags: 0,
+                    modifierFlagsCache: 0,
+                    transformFlags: 0,
+                    parent: undefined,
+                    kind: 226,
+                    expression: NodeObject {
+                      pos: 36,
+                      end: 53,
+                      flags: 0,
+                      modifierFlagsCache: 0,
+                      transformFlags: 0,
+                      parent: undefined,
+                      kind: 196,
+                      expression: NodeObject {
+                        pos: 36,
+                        end: 50,
+                        flags: 0,
+                        modifierFlagsCache: 0,
+                        transformFlags: 0,
+                        parent: undefined,
+                        kind: 194,
+                        expression: IdentifierObject {
+                          pos: 36,
+                          end: 46,
+                          flags: 0,
+                          modifierFlagsCache: 0,
+                          transformFlags: 0,
+                          parent: undefined,
+                          kind: 75,
+                          escapedText: 'console'
+                        },
+                        questionDotToken: undefined,
+                        name: IdentifierObject {
+                          pos: 47,
+                          end: 50,
+                          flags: 0,
+                          modifierFlagsCache: 0,
+                          transformFlags: 0,
+                          parent: undefined,
+                          kind: 75,
+                          escapedText: 'log'
+                        }
+                      },
+                      questionDotToken: undefined,
+                      arguments: [
+                        IdentifierObject {
+                          pos: 51,
+                          end: 52,
+                          flags: 0,
+                          modifierFlagsCache: 0,
+                          transformFlags: 0,
+                          parent: undefined,
+                          kind: 75,
+                          escapedText: 'a'
+                        },
+                        pos: 51,
+                        end: 52
+                      ]
+                    }
+                  },
+                  pos: 36,
+                  end: 54
+                ]
+              }
+            }
+          },
+          pos: 12,
+          end: 56
+        ]
+      }
+    },
+    pos: 0,
+    end: 57
+  ],
+  endOfFileToken: TokenObject {
+    pos: 57,
+    end: 58,
+    flags: 0,
+    modifierFlagsCache: 0,
+    transformFlags: 0,
+    parent: undefined,
+    kind: 1
+  },
+  externalModuleIndicator: NodeObject {
+    pos: 0,
+    end: 57,
+    flags: 0,
+    modifierFlagsCache: 0,
+    transformFlags: 0,
+    parent: undefined,
+    kind: 225,
+    decorators: undefined,
+    modifiers: [
+      TokenObject {
+        pos: 0,
+        end: 6,
+        flags: 0,
+        modifierFlagsCache: 0,
+        transformFlags: 0,
+        parent: undefined,
+        kind: 89
+      },
+      pos: 0,
+      end: 6
+    ],
+    declarationList: NodeObject {
+      pos: 6,
+      end: 56,
+      flags: 2,
+      modifierFlagsCache: 0,
+      transformFlags: 0,
+      parent: undefined,
+      kind: 243,
+      declarations: [
+        NodeObject {
+          pos: 12,
+          end: 56,
+          flags: 0,
+          modifierFlagsCache: 0,
+          transformFlags: 0,
+          parent: undefined,
+          kind: 242,
+          name: IdentifierObject {
+            pos: 12,
+            end: 25,
+            flags: 0,
+            modifierFlagsCache: 0,
+            transformFlags: 0,
+            parent: undefined,
+            kind: 75,
+            escapedText: 'someFunction'
+          },
+          type: undefined,
+          initializer: NodeObject {
+            pos: 27,
+            end: 56,
+            flags: 0,
+            modifierFlagsCache: 0,
+            transformFlags: 0,
+            parent: undefined,
+            kind: 202,
+            modifiers: undefined,
+            typeParameters: undefined,
+            parameters: [
+              NodeObject {
+                pos: 29,
+                end: 30,
+                flags: 0,
+                modifierFlagsCache: 0,
+                transformFlags: 0,
+                parent: undefined,
+                kind: 156,
+                decorators: undefined,
+                modifiers: undefined,
+                dotDotDotToken: undefined,
+                name: IdentifierObject {
+                  pos: 29,
+                  end: 30,
+                  flags: 0,
+                  modifierFlagsCache: 0,
+                  transformFlags: 0,
+                  parent: undefined,
+                  kind: 75,
+                  escapedText: 'a'
+                },
+                questionToken: undefined,
+                type: undefined,
+                initializer: undefined
+              },
+              pos: 29,
+              end: 30
+            ],
+            equalsGreaterThanToken: TokenObject {
+              pos: 31,
+              end: 34,
+              flags: 0,
+              modifierFlagsCache: 0,
+              transformFlags: 0,
+              parent: undefined,
+              kind: 38
+            },
+            body: NodeObject {
+              pos: 34,
+              end: 56,
+              flags: 0,
+              modifierFlagsCache: 0,
+              transformFlags: 0,
+              parent: undefined,
+              kind: 223,
+              multiLine: true,
+              statements: [
+                NodeObject {
+                  pos: 36,
+                  end: 54,
+                  flags: 0,
+                  modifierFlagsCache: 0,
+                  transformFlags: 0,
+                  parent: undefined,
+                  kind: 226,
+                  expression: NodeObject {
+                    pos: 36,
+                    end: 53,
+                    flags: 0,
+                    modifierFlagsCache: 0,
+                    transformFlags: 0,
+                    parent: undefined,
+                    kind: 196,
+                    expression: NodeObject {
+                      pos: 36,
+                      end: 50,
+                      flags: 0,
+                      modifierFlagsCache: 0,
+                      transformFlags: 0,
+                      parent: undefined,
+                      kind: 194,
+                      expression: IdentifierObject {
+                        pos: 36,
+                        end: 46,
+                        flags: 0,
+                        modifierFlagsCache: 0,
+                        transformFlags: 0,
+                        parent: undefined,
+                        kind: 75,
+                        escapedText: 'console'
+                      },
+                      questionDotToken: undefined,
+                      name: IdentifierObject {
+                        pos: 47,
+                        end: 50,
+                        flags: 0,
+                        modifierFlagsCache: 0,
+                        transformFlags: 0,
+                        parent: undefined,
+                        kind: 75,
+                        escapedText: 'log'
+                      }
+                    },
+                    questionDotToken: undefined,
+                    arguments: [
+                      IdentifierObject {
+                        pos: 51,
+                        end: 52,
+                        flags: 0,
+                        modifierFlagsCache: 0,
+                        transformFlags: 0,
+                        parent: undefined,
+                        kind: 75,
+                        escapedText: 'a'
+                      },
+                      pos: 51,
+                      end: 52
+                    ]
+                  }
+                },
+                pos: 36,
+                end: 54
+              ]
+            }
+          }
+        },
+        pos: 12,
+        end: 56
+      ]
+    }
+  },
+  commentDirectives: undefined,
+  nodeCount: 19,
+  identifierCount: 5,
+  identifiers: Map(4) {
+    'someFunction' => 'someFunction',
+    'a' => 'a',
+    'console' => 'console',
+    'log' => 'log'
+  },
+  parseDiagnostics: [],
+  path: '/home/dan/git/observability-analysis/tests/analyserTests/files/samples/observer-module.ts',
+  resolvedPath: '/home/dan/git/observability-analysis/tests/analyserTests/files/samples/observer-module.ts',
+  originalFileName: '/home/dan/git/observability-analysis/tests/analyserTests/files/samples/observer-module.ts',
+  imports: [],
+  moduleAugmentations: [],
+  ambientModuleNames: [],
+  resolvedModules: undefined
+}
+
+
+
+
+><><><><><tests/analyserTests/files/samples/observation-happening-in-imported-function.ts><><><><><><
+SourceFileObject {
+  pos: 0,
+  end: 91,
+  flags: 0,
+  modifierFlagsCache: 0,
+  transformFlags: 0,
+  parent: undefined,
+  kind: 290,
+  text: 'import { someFunction } from "./observer-module";\n' +
+    'const filesB = 5;\n' +
+    '\n' +
+    'someFunction(filesB);\n',
+  bindDiagnostics: [],
+  bindSuggestionDiagnostics: undefined,
+  languageVersion: undefined,
+  fileName: 'tests/analyserTests/files/samples/observation-happening-in-imported-function.ts',
+  languageVariant: 0,
+  isDeclarationFile: false,
+  scriptKind: 3,
+  pragmas: Map(0) {},
+  checkJsDirective: undefined,
+  referencedFiles: [],
+  typeReferenceDirectives: [],
+  libReferenceDirectives: [],
+  amdDependencies: [],
+  hasNoDefaultLib: false,
+  statements: [
+    NodeObject {
+      pos: 0,
+      end: 49,
+      flags: 0,
+      modifierFlagsCache: 0,
+      transformFlags: 0,
+      parent: undefined,
+      kind: 254,
+      decorators: undefined,
+      modifiers: undefined,
+      importClause: NodeObject {
+        pos: 6,
+        end: 23,
+        flags: 0,
+        modifierFlagsCache: 0,
+        transformFlags: 0,
+        parent: undefined,
+        kind: 255, // ImportClause
+        isTypeOnly: false,
+        namedBindings: NodeObject {
+          pos: 6,
+          end: 23,
+          flags: 0,
+          modifierFlagsCache: 0,
+          transformFlags: 0,
+          parent: undefined,
+          kind: 257, // NamedImports
+          elements: [ 
+            NodeObject {
+              pos: 8,
+              end: 21,
+              flags: 0,
+              modifierFlagsCache: 0,
+              transformFlags: 0,
+              parent: undefined,
+              kind: 258, // ImportSpecifier
+              name: IdentifierObject {
+                pos: 8,
+                end: 21,
+                flags: 0,
+                modifierFlagsCache: 0,
+                transformFlags: 0,
+                parent: undefined,
+                kind: 75, // Identifier
+                escapedText: 'someFunction'
+              }
+            },
+            pos: 8,
+            end: 21
+          ]
+        }
+      },
+      moduleSpecifier: TokenObject {
+        pos: 28,
+        end: 48,
+        flags: 0,
+        modifierFlagsCache: 0,
+        transformFlags: 0,
+        parent: undefined,
+        kind: 10,
+        text: './observer-module'
+      }
+    },
+    NodeObject {
+      pos: 49,
+      end: 67,
+      flags: 0,
+      modifierFlagsCache: 0,
+      transformFlags: 0,
+      parent: undefined,
+      kind: 225,
+      decorators: undefined,
+      modifiers: undefined,
+      declarationList: NodeObject {
+        pos: 49,
+        end: 66,
+        flags: 2,
+        modifierFlagsCache: 0,
+        transformFlags: 0,
+        parent: undefined,
+        kind: 243,
+        declarations: [
+          NodeObject {
+            pos: 55,
+            end: 66,
+            flags: 0,
+            modifierFlagsCache: 0,
+            transformFlags: 0,
+            parent: undefined,
+            kind: 242,
+            name: IdentifierObject {
+              pos: 55,
+              end: 62,
+              flags: 0,
+              modifierFlagsCache: 0,
+              transformFlags: 0,
+              parent: undefined,
+              kind: 75,
+              escapedText: 'filesB'
+            },
+            type: undefined,
+            initializer: TokenObject {
+              pos: 64,
+              end: 66,
+              flags: 0,
+              modifierFlagsCache: 0,
+              transformFlags: 0,
+              parent: undefined,
+              kind: 8,
+              text: '5',
+              numericLiteralFlags: 0
+            }
+          },
+          pos: 55,
+          end: 66
+        ]
+      }
+    },
+    NodeObject {
+      pos: 67,
+      end: 90,
+      flags: 0,
+      modifierFlagsCache: 0,
+      transformFlags: 0,
+      parent: undefined,
+      kind: 226,
+      expression: NodeObject {
+        pos: 67,
+        end: 89,
+        flags: 0,
+        modifierFlagsCache: 0,
+        transformFlags: 0,
+        parent: undefined,
+        kind: 196,
+        expression: IdentifierObject {
+          pos: 67,
+          end: 81,
+          flags: 0,
+          modifierFlagsCache: 0,
+          transformFlags: 0,
+          parent: undefined,
+          kind: 75,
+          escapedText: 'someFunction'
+        },
+        questionDotToken: undefined,
+        arguments: [
+          IdentifierObject {
+            pos: 82,
+            end: 88,
+            flags: 0,
+            modifierFlagsCache: 0,
+            transformFlags: 0,
+            parent: undefined,
+            kind: 75,
+            escapedText: 'filesB'
+          },
+          pos: 82,
+          end: 88
+        ]
+      }
+    },
+    pos: 0,
+    end: 90
+  ],
+  endOfFileToken: TokenObject {
+    pos: 90,
+    end: 91,
+    flags: 0,
+    modifierFlagsCache: 0,
+    transformFlags: 0,
+    parent: undefined,
+    kind: 1
+  },
+  externalModuleIndicator: NodeObject {
+    pos: 0,
+    end: 49,
+    flags: 0,
+    modifierFlagsCache: 0,
+    transformFlags: 0,
+    parent: undefined,
+    kind: 254,
+    decorators: undefined,
+    modifiers: undefined,
+    importClause: NodeObject {
+      pos: 6,
+      end: 23,
+      flags: 0,
+      modifierFlagsCache: 0,
+      transformFlags: 0,
+      parent: undefined,
+      kind: 255,
+      isTypeOnly: false,
+      namedBindings: NodeObject {
+        pos: 6,
+        end: 23,
+        flags: 0,
+        modifierFlagsCache: 0,
+        transformFlags: 0,
+        parent: undefined,
+        kind: 257,
+        elements: [
+          NodeObject {
+            pos: 8,
+            end: 21,
+            flags: 0,
+            modifierFlagsCache: 0,
+            transformFlags: 0,
+            parent: undefined,
+            kind: 258,
+            name: IdentifierObject {
+              pos: 8,
+              end: 21,
+              flags: 0,
+              modifierFlagsCache: 0,
+              transformFlags: 0,
+              parent: undefined,
+              kind: 75,
+              escapedText: 'someFunction'
+            }
+          },
+          pos: 8,
+          end: 21
+        ]
+      }
+    },
+    moduleSpecifier: TokenObject {
+      pos: 28,
+      end: 48,
+      flags: 0,
+      modifierFlagsCache: 0,
+      transformFlags: 0,
+      parent: undefined,
+      kind: 10,
+      text: './observer-module'
+    }
+  },
+  commentDirectives: undefined,
+  nodeCount: 17,
+  identifierCount: 4,
+  identifiers: Map(3) {
+    'someFunction' => 'someFunction',
+    './observer-module' => './observer-module',
+    'filesB' => 'filesB'
+  },
+  parseDiagnostics: [],
+  path: '/home/dan/git/observability-analysis/tests/analyserTests/files/samples/observation-happening-in-imported-function.ts',
+  resolvedPath: '/home/dan/git/observability-analysis/tests/analyserTests/files/samples/observation-happening-in-imported-function.ts',
+  originalFileName: 'tests/analyserTests/files/samples/observation-happening-in-imported-function.ts',
+  imports: [
+    TokenObject {
+      pos: 28,
+      end: 48,
+      flags: 0,
+      modifierFlagsCache: 0,
+      transformFlags: 0,
+      parent: undefined,
+      kind: 10,
+      text: './observer-module'
+    }
+  ],
+  moduleAugmentations: [],
+  ambientModuleNames: [],
+  resolvedModules: Map(1) {
+    './observer-module' => {
+      resolvedFileName: '/home/dan/git/observability-analysis/tests/analyserTests/files/samples/observer-module.ts',
+      originalPath: undefined,
+      extension: '.ts',
+      isExternalLibraryImport: false,
+      packageId: undefined
+    }
+  }
+}
+
+
+
+
