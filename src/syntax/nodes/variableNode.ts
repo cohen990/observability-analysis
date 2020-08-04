@@ -1,4 +1,4 @@
-import { VariableDeclaration, SourceFile } from "typescript";
+import { VariableDeclaration, SourceFile, SyntaxKind } from "typescript";
 import { Scoped } from "../../scope";
 import { SyntaxNode } from "./syntaxNode";
 
@@ -31,3 +31,11 @@ export class VariableNode implements Scoped {
     return sourceFile.getLineAndCharacterOfPosition(this.typed().pos).character;
   };
 }
+
+export const isVariable = (node: SyntaxNode) => {
+  return node.base.kind === SyntaxKind.VariableDeclaration;
+};
+
+export const toVariable = (node: SyntaxNode) => {
+  return new VariableNode(node);
+};

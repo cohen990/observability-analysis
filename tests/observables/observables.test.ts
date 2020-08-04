@@ -5,6 +5,11 @@ import { compile, isNotNodeModule } from "../../src/files/";
 import { variableFrom } from "../../src/syntax/variable";
 import { observationFrom } from "../../src/syntax/observation";
 import { buildScope } from "../../src/scope";
+import {
+  toObservation,
+  isObservation,
+} from "../../src/syntax/nodes/observationNode";
+import { isVariable, toVariable } from "../../src/syntax/nodes/variableNode";
 
 describe("observables", () => {
   const sample = (file) => getSample(file, "observables/");
@@ -14,7 +19,7 @@ describe("observables", () => {
     const source = compiled.filter(isNotNodeModule)[0];
     const flattened = flatten(source);
     const declaration = variableFrom(
-      flattened.filter((x) => x.isVariable())[0].toVariable(),
+      flattened.filter(isVariable).map(toVariable)[0],
       source
     );
 
@@ -36,13 +41,13 @@ describe("observables", () => {
     const source = compiled.filter(isNotNodeModule)[0];
     const flattened = flatten(source);
     const declaration = variableFrom(
-      flattened.filter((x) => x.isVariable())[0].toVariable(),
+      flattened.filter(isVariable).map(toVariable)[0],
       source
     );
     const observation = observationFrom(
-      flattened
-        .filter((x) => x.isObservation(["console.log"]))[0]
-        .toObservation()
+      toObservation(
+        flattened.filter((x) => isObservation(x, ["console.log"]))[0]
+      )
     );
 
     const observables = getObservables(
@@ -66,11 +71,12 @@ describe("observables", () => {
     const flattened = flatten(source);
 
     const declarations = flattened
-      .filter((x) => x.isVariable())
-      .map((x) => variableFrom(x.toVariable(), source));
+      .filter(isVariable)
+      .map(toVariable)
+      .map((x) => variableFrom(x, source));
     const observations = flattened
-      .filter((x) => x.isObservation(["console.log"]))
-      .map((x) => observationFrom(x.toObservation()));
+      .filter((x) => isObservation(x, ["console.log"]))
+      .map((x) => observationFrom(toObservation(x)));
 
     const observables = getObservables(
       declarations,

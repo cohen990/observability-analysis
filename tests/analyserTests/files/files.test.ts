@@ -50,7 +50,7 @@ describe("files", () => {
     );
   });
 
-  it("should recognise that an imported function is observing a variable", () => {
+  xit("should recognise that an imported function is observing a variable", () => {
     const file = sample("observation-happening-in-imported-function");
     const analysis = analyse(file);
     const files = analysis.files;

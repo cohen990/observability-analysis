@@ -1,4 +1,8 @@
-import { FunctionDeclaration, ParameterDeclaration } from "typescript";
+import {
+  FunctionDeclaration,
+  ParameterDeclaration,
+  SyntaxKind,
+} from "typescript";
 import { Scoped } from "../../scope";
 import { SyntaxNode } from "./syntaxNode";
 import { ParameterNode } from "./parameterNode";
@@ -23,3 +27,19 @@ export class FunctionNode implements Scoped {
     return new ParameterNode(new SyntaxNode(declaration, this.node));
   }
 }
+
+export const isFunctionWithParameters = (node: SyntaxNode) => {
+  return isFunction(node) && hasParameters(node);
+};
+
+export const toFunction = (node: SyntaxNode) => {
+  return new FunctionNode(node);
+};
+
+const isFunction = (node: SyntaxNode) => {
+  return node.base.kind === SyntaxKind.FunctionDeclaration;
+};
+
+const hasParameters = (node: SyntaxNode) => {
+  return (node.base as FunctionDeclaration).parameters.length > 0;
+};

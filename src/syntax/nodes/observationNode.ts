@@ -45,3 +45,66 @@ export class ObservationNode implements Scoped {
     return this.typed().arguments[0].kind === SyntaxKind.TemplateExpression;
   }
 }
+
+export const isObservation = (node: SyntaxNode, observers: Array<string>) => {
+  if (node.base.kind !== SyntaxKind.CallExpression) {
+    return false;
+  }
+
+  for (const observer of observers) {
+    const [expressionText, expressionName] = getSingleDottedExpression(node);
+
+    if (observer.indexOf(".") > 0) {
+      const [observerExpressionText, observerExpressionName] = observer.split(
+        "."
+      );
+
+      if (
+        expressionText === observerExpressionText &&
+        expressionName === observerExpressionName
+      ) {
+        return true;
+      }
+    } else {
+      const expressionText = getNoDottedExpression(node);
+      if (expressionText === observer) {
+        return true;
+      }
+    }
+  }
+
+  return false;
+};
+
+export const toObservation = (node: SyntaxNode) => {
+  return new ObservationNode(node);
+};
+
+const getSingleDottedExpression = (node: SyntaxNode) => {
+  return [getExpressionText(node), getExpressionName(node)];
+};
+
+const getNoDottedExpression = (node: SyntaxNode) => {
+  try {
+    return ((node.base as CallExpression).expression as any).text;
+  } catch {
+    return undefined;
+  }
+};
+
+const getExpressionText = (node: SyntaxNode) => {
+  try {
+    return (((node.base as CallExpression).expression as any).expression as any)
+      .text;
+  } catch {
+    return undefined;
+  }
+};
+
+const getExpressionName = (node: SyntaxNode) => {
+  try {
+    return (((node.base as CallExpression).expression as any).name as any).text;
+  } catch {
+    return undefined;
+  }
+};
